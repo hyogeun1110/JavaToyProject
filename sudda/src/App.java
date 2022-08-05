@@ -6,7 +6,8 @@ public class App {
         StartGame.getInstance().setPlayerName(); // 플레이어 이름
 
         try {
-            Shuffle.getInstance().handOutCard();
+            Shuffle.getInstance().handOutCard(); // 카드 분배
+            new Reload().reloadCard();  // 카드1장 교체
         } catch (Exception e){
             e.printStackTrace();
         }

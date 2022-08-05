@@ -18,26 +18,29 @@ public class Shuffle {
         TimeUnit.MILLISECONDS.sleep(750);
         System.out.println("카드를 배분합니다.");
         Random random = new Random();
-        for(int i=0; i<StartGame.getInstance().getPlayerNum(); i++) {
+        Loop1 : for(int i=0; i<StartGame.getInstance().getPlayerNum(); i++) {
             int num1 = random.nextInt(20);
             int num2 = random.nextInt(20);
             Storage.players.get(i).setFirstCard(Storage.deck[num1]);
             Storage.players.get(i).setSecondCard(Storage.deck[num2]);
             if (num1 == num2) {
                 i--;
-                continue;
+                continue Loop1;
             }
-            for (int j = 0; j < i; j++) {
-                if (Storage.players.get(i).getFirstCard().equals(Storage.players.get(j).getFirstCard()) ||
-                        Storage.players.get(i).getFirstCard().equals(Storage.players.get(j).getSecondCard()) ||
-                        Storage.players.get(i).getSecondCard().equals(Storage.players.get(j).getSecondCard()) ||
-                        Storage.players.get(i).getSecondCard().equals(Storage.players.get(j).getFirstCard()))
-                {
-                    i--;
-                }
+            if (Storage.deckIndex.contains(num1) || Storage.deckIndex.contains(num2))
+            {
+                i--;
+                continue Loop1;
             }
+            Storage.deckIndex.add(num1);
+            Storage.deckIndex.add(num2);
         }
-        for (int i=0; i< StartGame.getInstance().getPlayerNum(); i++){
+        printPlayerCard();
+    }
+
+    //플레이어의 카드 출력
+    public void printPlayerCard() throws Exception{
+        for (int i=0; i< StartGame.getInstance().getPlayerNum(); i++) {
             TimeUnit.MILLISECONDS.sleep(1300);
             System.out.print(Storage.players.get(i).getPlayerName() + " : ");
             TimeUnit.MILLISECONDS.sleep(1000);
