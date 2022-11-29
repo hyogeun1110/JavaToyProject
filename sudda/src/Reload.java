@@ -1,9 +1,9 @@
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
 
-// 플레이어가 원하는 카드 한장 교
+// 플레이어가 원하는 카드 한장 교체
 public class Reload {
     public void reloadCard(){
         System.out.println("카드1장을 교체합니다. 교체하지 않을 경우 x를 입력하세요.");
@@ -47,5 +47,6 @@ public class Reload {
         } catch (Exception e){
             e.printStackTrace();
         }
+        scanner.close();
     }
 }
